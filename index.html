@@ -196,20 +196,32 @@
         <img src="images/Адский рай.jpg" alt="Адский рай">
         <h3>Адский рай (Hell’s Paradise)</h3>
         <p>Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.</p>
-    <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
+   <button onclick="openModal(
+  'Адский рай (Hell’s Paradise)', 
+  'https://www.youtube.com/embed/1G8s7H1u9mE', 
+  'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.'
+)">Подробнее</button>
 
     </div>
     <div class="anime-card">
          <img src="images/Атака Титанов.jpg" alt="Атака Титанов">
         <h3>Атака титанов (Attack on Titan)</h3>
         <p>Люди сражаются за выживание против гигантских существ — титанов.</p>
-   <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
+   <button onclick="openModal(
+  'Атака Титанов (Attack on Titan)', 
+  'https://www.youtube.com/embed/MGRm4IzK1SQ', 
+  'Люди сражаются за выживание против гигантских существ — титанов.'
+)">Подробнее</button>
     </div>
     <div class="anime-card">
         <img src="images/гуль.jpg" alt="Токийский гуль">
         <h3>Токийский гуль (Tokyo Ghoul)</h3>
         <p>История про студента, который превращается в полугуля и борется с другими гулем.</p>
-    <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
+   <button onclick="openModal(
+  'Токийский гуль (Tokyo Ghoul)', 
+  'https://www.youtube.com/embed/HoN6D0xJpFM', 
+  'История про студента, который превращается в полугуля и борется с другими гулем.'
+)">Подробнее</button>
 </div>
 </div>
 <script>
@@ -230,40 +242,48 @@
 </script>
 <!-- Модальное окно -->
 <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-    background-color: rgba(0,0,0,0.6); justify-content:center; align-items:center;">
-    <div style="background:white; border-radius:10px; padding:20px; width:80%; max-width:500px; text-align:center; position:relative;">
-        <span id="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+    background-color: rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+    <div style="background:white; border-radius:15px; padding:20px; width:80%; max-width:700px; text-align:center; position:relative;">
+        <span id="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px;">&times;</span>
         <h2 id="modal-title">Название аниме</h2>
-        <img id="modal-img" src="" alt="" style="width:100%; height:auto; margin:10px 0;">
+        <div id="modal-video" style="margin:10px 0;">
+            <!-- Тут будет видео -->
+        </div>
         <p id="modal-desc">Описание аниме...</p>
     </div>
 </div>
+
 <script>
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
-    const modalImg = document.getElementById('modal-img');
+    const modalVideo = document.getElementById('modal-video');
     const modalDesc = document.getElementById('modal-desc');
     const closeBtn = document.getElementById('close');
 
-    function openModal(title, imgSrc, desc) {
+    function openModal(title, videoURL, desc) {
         modalTitle.textContent = title;
-        modalImg.src = imgSrc;
+        // Вставляем видео через iframe
+        modalVideo.innerHTML = `<iframe width="100%" height="315" src="${videoURL}" 
+            title="${title}" frameborder="0" allowfullscreen></iframe>`;
         modalDesc.textContent = desc;
         modal.style.display = 'flex';
     }
 
     closeBtn.onclick = function() {
         modal.style.display = 'none';
+        modalVideo.innerHTML = ''; // удаляем видео, чтобы оно останавливалось
     }
 
     // Закрытие по клику вне окна
     window.onclick = function(event) {
         if(event.target == modal) {
             modal.style.display = 'none';
+            modalVideo.innerHTML = '';
         }
     }
 </script>
 </body>
 </html>
+
 
 
