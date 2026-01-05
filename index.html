@@ -1,67 +1,188 @@
+<input type="text" id="search" placeholder="Поиск аниме..." style="width: 100%; padding: 10px; margin-bottom: 20px; font-size:16px;">
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой каталог аниме</title>
-    <style>
+   <style>
+    /* Общий стиль страницы */
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
+        font-family: 'Poppins', Arial, sans-serif;
+        background: linear-gradient(135deg, #e0f7ff, #f0f0f0);
         margin: 0;
         padding: 20px;
     }
 
+    /* Заголовок сайта */
     header {
         text-align: center;
-        background-color: #333;
+        background-color: #1e1e2f;
         color: white;
-        padding: 20px 0;
-        margin-bottom: 20px;
+        padding: 25px 0;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
     header h1 {
         margin: 0;
+        font-size: 32px;
+        letter-spacing: 1px;
     }
 
+    /* Поле поиска */
+    input#search {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 30px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid #aaa;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input#search:focus {
+        border-color: #3399ff;
+        box-shadow: 0 0 10px rgba(51,153,255,0.4) inset;
+    }
+
+    /* Контейнер карточек */
     .container {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 25px;
         justify-content: center;
     }
 
+    /* Карточки аниме */
     .anime-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        background: linear-gradient(to bottom right, #ffffff, #cceeff);
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         width: 250px;
         overflow: hidden;
-        transition: transform 0.2s;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 15px;
     }
 
     .anime-card:hover {
-        transform: scale(1.05);
+        transform: scale(1.07);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     .anime-card img {
         width: 100%;
         height: 350px;
         object-fit: cover;
+        border-bottom: 1px solid #ddd;
+        transition: transform 0.3s;
+    }
+
+    .anime-card img:hover {
+        transform: scale(1.05);
     }
 
     .anime-card h3 {
-        margin: 10px;
-        font-size: 18px;
+        margin: 12px 0 8px 0;
+        font-size: 20px;
+        color: #1e1e2f;
     }
 
     .anime-card p {
-        margin: 0 10px 10px 10px;
+        margin: 0 12px 12px 12px;
         font-size: 14px;
-        color: #555;
+        color: #333;
+    }
+
+    /* Кнопка “Подробнее” */
+    .anime-card button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 12px;
+        background-color: #3399ff;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+        transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        margin-bottom: 8px;
+    }
+
+    .anime-card button:hover {
+        background-color: #007acc;
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Модальное окно */
+    #modal {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    #modal div {
+        background: linear-gradient(to bottom right, #ffffff, #e0f7ff);
+        border-radius: 15px;
+        padding: 25px;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    #modal img {
+        width: 100%;
+        height: auto;
+        margin: 15px 0;
+        border-radius: 10px;
+    }
+
+    #close {
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        transition: color 0.2s;
+    }
+
+    #close:hover {
+        color: #ff3333;
+    }
+
+    @keyframes fadeIn {
+        from {opacity:0; transform: scale(0.9);}
+        to {opacity:1; transform: scale(1);}
+    }
+
+    /* Адаптивность */
+    @media screen and (max-width: 768px) {
+        .anime-card { width: 45%; }
+    }
+
+    @media screen and (max-width: 500px) {
+        .anime-card { width: 90%; }
     }
 </style>
-
 </head>
 <body>
   <header>
@@ -72,21 +193,77 @@
 
 <div class="container">
     <div class="anime-card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/0a/Hell's_Paradise.jpg" alt="Адский рай">
+        <img src="images/Адский рай.jpg" alt="Адский рай">
         <h3>Адский рай (Hell’s Paradise)</h3>
         <p>Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.</p>
+    <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
+
     </div>
     <div class="anime-card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Attack_on_Titan_Season_4_Poster.jpg" alt="Атака титанов">
+         <img src="images/Атака Титанов.jpg" alt="Атака Титанов">
         <h3>Атака титанов (Attack on Titan)</h3>
         <p>Люди сражаются за выживание против гигантских существ — титанов.</p>
+   <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
     </div>
     <div class="anime-card">
-        <img src="https://upload.wikimedia.org/wikipedia/en/c/cf/Tokyo_Ghoul_manga_volume_1_cover.jpg" alt="Токийский гуль">
+        <img src="images/гуль.jpg" alt="Токийский гуль">
         <h3>Токийский гуль (Tokyo Ghoul)</h3>
         <p>История про студента, который превращается в полугуля и борется с другими гулем.</p>
+    <button onclick="openModal('Адский рай (Hell’s Paradise)', 'https://upload.wikimedia.org/wikipedia/en/0/0a/Hell\'s_Paradise.jpg', 'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.')">Подробнее</button>
+</div>
+</div>
+<script>
+    const searchInput = document.getElementById('search');
+    const cards = document.querySelectorAll('.anime-card');
+
+    searchInput.addEventListener('input', function() {
+        const filter = searchInput.value.toLowerCase();
+        cards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            if(title.includes(filter)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+<!-- Модальное окно -->
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background-color: rgba(0,0,0,0.6); justify-content:center; align-items:center;">
+    <div style="background:white; border-radius:10px; padding:20px; width:80%; max-width:500px; text-align:center; position:relative;">
+        <span id="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+        <h2 id="modal-title">Название аниме</h2>
+        <img id="modal-img" src="" alt="" style="width:100%; height:auto; margin:10px 0;">
+        <p id="modal-desc">Описание аниме...</p>
     </div>
 </div>
+<script>
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalImg = document.getElementById('modal-img');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeBtn = document.getElementById('close');
 
+    function openModal(title, imgSrc, desc) {
+        modalTitle.textContent = title;
+        modalImg.src = imgSrc;
+        modalDesc.textContent = desc;
+        modal.style.display = 'flex';
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // Закрытие по клику вне окна
+    window.onclick = function(event) {
+        if(event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
+
+
