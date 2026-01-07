@@ -1,4 +1,3 @@
-<input type="text" id="search" placeholder="Поиск аниме..." style="width: 100%; padding: 10px; margin-bottom: 20px; font-size:16px;">
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -184,7 +183,11 @@
     }
 </style>
 </head>
-<body>
+<body.dark {
+    background: black;
+    color: white;
+}>
+    <input type="text" id="search" placeholder="Поиск аниме..." style="width: 100%; padding: 10px; margin-bottom: 20px; font-size:16px;">   
   <header>
     <h1>Добро пожаловать в каталог аниме!</h1>
 </header>
@@ -193,42 +196,35 @@
 
 <div class="container">
     <div class="anime-card">
-        <img src="images/Адский рай.jpg" alt="Адский рай">
+        <img src="images/adskiy-ray.jpg" alt="Адский рай">
         <h3>Адский рай (Hell’s Paradise)</h3>
         <p>Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.</p>
-   <button onclick="openModal(
-  'Адский рай (Hell’s Paradise)', 
-  'https://www.youtube.com/embed/7L2GrqZ0ZOs', 
-  'Приключенческое аниме про ниндзя и опасные миссии на таинственном острове.'
-)">Подробнее</button>
+   <button onclick="openPlayer('7L2GrqZ0ZOs', 'Адский рай')">
+    ▶ Смотреть
+</button>
 
     </div>
     <div class="anime-card">
-         <img src="images/Атака Титанов.jpg" alt="Атака Титанов">
+        <img src="images/Атака Титанов jpg" alt="Атака Титанов">
         <h3>Атака титанов (Attack on Titan)</h3>
         <p>Люди сражаются за выживание против гигантских существ — титанов.</p>
-   <button onclick="openModal(
-  'Атака Титанов (Attack on Titan)', 
-  'https://www.youtube.com/embed/MGRm4IzK1SQ', 
-  'Люди сражаются за выживание против гигантских существ — титанов.'
-)">Подробнее</button>
+   <button onclick="openPlayer('7L2GrqZ0ZOs', 'Адский рай')">
+    ▶ Смотреть
+</button>
     </div>
     <div class="anime-card">
-        <img src="images/гуль.jpg" alt="Токийский гуль">
+        <img src="images/tokyo-ghoul.jpg" alt="Токийский гуль">
         <h3>Токийский гуль (Tokyo Ghoul)</h3>
         <p>История про студента, который превращается в полугуля и борется с другими гулем.</p>
-   <button onclick="openModal(
-  'Токийский гуль (Tokyo Ghoul)', 
-  'https://www.youtube.com/embed/HoN6D0xJpFM', 
-  'История про студента, который превращается в полугуля и борется с другими гулем.'
-)">Подробнее</button>
+   <button onclick="openPlayer('7L2GrqZ0ZOs', 'Адский рай')">
+    ▶ Смотреть
+</button>
 </div>
 </div>
 <script>
     const searchInput = document.getElementById('search');
     const cards = document.querySelectorAll('.anime-card');
-
-    searchInput.addEventListener('input', function() {
+     searchInput.addEventListener('input', function() {
         const filter = searchInput.value.toLowerCase();
         cards.forEach(card => {
             const title = card.querySelector('h3').textContent.toLowerCase();
@@ -252,6 +248,57 @@
         <p id="modal-desc">Описание аниме...</p>
     </div>
 </div>
+<div id="playerModal" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+">
+    <div style="
+        background:#000;
+        padding:15px;
+        border-radius:15px;
+        width:90%;
+        max-width:900px;
+        position:relative;
+    ">
+        <span onclick="closePlayer()" style="
+            position:absolute;
+            top:10px;
+            right:15px;
+            font-size:28px;
+            color:white;
+            cursor:pointer;
+        ">&times;</span>
+
+        <h2 id="playerTitle" style="color:white; text-align:center;"></h2>
+
+        <iframe id="videoPlayer"
+            width="100%"
+            height="450"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+<body.dark {
+    background: black;
+    color: white;
+}
+>
+     <iframe 
+    width="560" 
+    height="315"
+    frameborder="0"
+    allowfullscreen>
+</iframe>
 
 <script>
     const modal = document.getElementById('modal');
@@ -279,12 +326,13 @@
     window.onclick = function(event) {
         if(event.target == modal) {
             modal.style.display = 'none';
-            modalVideo.innerHTML = '';
-        }
-    }
+            modalVideo.innerHTML =  }
 </script>
-</body>
-</html>
+<body.dark {background: black;
+    color: white;}
+></html>
+
+
 
 
 
