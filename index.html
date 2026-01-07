@@ -208,7 +208,7 @@
         <img src="images/Атака Титанов jpg" alt="Атака Титанов">
         <h3>Атака титанов (Attack on Titan)</h3>
         <p>Люди сражаются за выживание против гигантских существ — титанов.</p>
-   <button onclick="openPlayer('7L2GrqZ0ZOs', 'Адский рай')">
+   <button onclick="openPlayer('8H24BA95SpE', 'Атака титанов')">
     ▶ Смотреть
 </button>
     </div>
@@ -216,7 +216,7 @@
         <img src="images/tokyo-ghoul.jpg" alt="Токийский гуль">
         <h3>Токийский гуль (Tokyo Ghoul)</h3>
         <p>История про студента, который превращается в полугуля и борется с другими гулем.</p>
-   <button onclick="openPlayer('7L2GrqZ0ZOs', 'Адский рай')">
+   <<button onclick="openPlayer('HoN6D0xJpFM', 'Токийский гуль')">
     ▶ Смотреть
 </button>
 </div>
@@ -288,6 +288,19 @@
         </iframe>
     </div>
 </div>
+<script>
+function openPlayer(videoId, title) {
+    document.getElementById('playerTitle').innerText = title;
+    document.getElementById('videoPlayer').src =
+        "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
+    document.getElementById('playerModal').style.display = "flex";
+}
+
+function closePlayer() {
+    document.getElementById('playerModal').style.display = "none";
+    document.getElementById('videoPlayer').src = "";
+}
+</script>
 <body.dark {
     background: black;
     color: white;
